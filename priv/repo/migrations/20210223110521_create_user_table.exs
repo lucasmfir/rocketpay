@@ -4,7 +4,7 @@ defmodule Rocketpay.Repo.Migrations.CreateUserTable do
   def change do
     # create table :users, primary_key: false  do
     #   add(:id, :bigserial, primary_key: true)
-    create table :users do
+    create table(:users) do
       add(:name, :string)
       add(:age, :integer)
       add(:email, :string)
