@@ -1,6 +1,6 @@
 defmodule Rocketpay.Accounts.Operation do
   alias Ecto.Multi
-  alias Rocketpay.{Account, Repo}
+  alias Rocketpay.Account
 
   def call(params, operation) do
     operation_name = get_account_operation_name(operation)
