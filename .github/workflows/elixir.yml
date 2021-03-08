@@ -2,6 +2,9 @@ name: Rocketpay CI
 
 on: push
 
+env:
+  MIX_ENV: test
+
 jobs:
   test:
     runs-on: ubuntu-latest
