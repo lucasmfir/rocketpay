@@ -46,7 +46,7 @@ jobs:
         POSTGRES_PORT: $❴❴ job.services.postgres.ports[5432] ❵❵
 
     - name: Check code qualit
-      run: mix format --check-formatted \n
+      run: mix format --check-formatted && \
            mix credo --strict
 
 # name: Elixir CI
