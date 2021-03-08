@@ -27,8 +27,8 @@ jobs:
       # - name: Checar Formata
       #   run: mix format --check-formatted
 
-      # - name: Instalar as dependências
-      #   run: mix deps.get
+      - name: Instalar as dependências
+        run: mix deps.get
 
       - name: Testar
         run: mix test
