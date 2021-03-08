@@ -1,19 +1,13 @@
-name: Elixir CI
+name: Meu Workflow
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-env:
-  MIX_ENV: test
+on: push
 
 jobs:
-  build:
-
-    name: Build and test
+  test:
     runs-on: ubuntu-latest
+
+    container:
+      image: elixir:1.10
 
     services:
       postgres:
@@ -23,27 +17,21 @@ jobs:
           - 5432:5432
 
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: rocketpay_test
+          POSTGRES_USER: usuario
+          POSTGRES_PASSWORD: senha
+          POSTGRES_DB: banco
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Elixir
-      uses: actions/setup-elixir@v1
-      with:
-        elixir-version: '1.10.4' # Define the elixir version [required]
-        otp-version: '22.2.1' # Define the OTP version [required]
-    - name: Restore dependencies cache
-      uses: actions/cache@v2
-      with:
-        path: deps
-        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-        restore-keys: ${{ runner.os }}-mix-
-    - name: Install dependencies
-      run: mix deps.get
-    - name: Run tests
-      run: mix test
-      env:
+      - uses: actions/checkout@v1
+
+      - name: Formatar
+        run: mix format --check-formatted
+
+      - name: Instalar as dependências
+        run: mix deps.get
+
+      - name: Testar
+        run: mix test
+        env:
           POSTGRES_HOST: postgres
           POSTGRES_PORT: $❴❴ job.services.postgres.ports[5432] ❵❵
